@@ -31,5 +31,5 @@ function getPosts() {
 createPost({ title: "This is the new added post 1", body: "bla bla bla" })
   .then(getPosts)
   .catch(function (err) {
-    console.log(err);
+    document.querySelector(".posts").innerHTML = `<p>${err}</p>`;
   });
