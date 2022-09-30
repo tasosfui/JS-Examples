@@ -9,26 +9,32 @@ function createPost(post) {
   return new Promise(function (resolve, reject) {
     setTimeout(function () {
       posts.push(post);
-      const error = false;
+      const error = true;
 
       if (!error) {
         resolve();
       } else {
         reject("something went wrong");
       }
-    }, 5000);
+    }, 2000);
   });
 }
 
 function getPosts() {
   let output = "";
   posts.forEach((post) => {
-    output += `<li>${post.title}</li>`;
+    output += `<li><h2>${post.title}</h2><p>${post.body}</p></li>`;
   });
   document.querySelector(".posts").innerHTML = output;
 }
 
-createPost({ title: "This is the new added post 1", body: "bla bla bla" })
+createPost({ title: "New post 1", body: "This is a new post" })
+  .then(getPosts)
+  .catch(function (err) {
+    document.querySelector(".posts").innerHTML = `<p>${err}</p>`;
+  });
+
+createPost({ title: "New post 2", body: "This is a new post" })
   .then(getPosts)
   .catch(function (err) {
     document.querySelector(".posts").innerHTML = `<p>${err}</p>`;
